@@ -41,6 +41,8 @@ npm start
 
 You will be provided with local URLs for each function for testing.
 
+Note: Previously, running Azure functions locally required .NET Core to be installed. That is no longer the case.
+
 Note: The file `{function name}/function.json` is included in the template for the quickstart, but this will be replaced by a generated file from the `serverless-azure-functions` plugin at deployment. There will soon be an option in the plugin for generating this file before deployment for local testing, but that scenario is not currently supported. If you want to test different function bindings locally before deploying, make the changes manually in `function.json` and update the `serverless.yml` to reflect the same.
 
 ## Deploy and test
