@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: azure-nodejs # NOTE: update this with your service name
+service: azure-dotnet # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -19,9 +19,9 @@ service: azure-nodejs # NOTE: update this with your service name
 
 provider:
   name: azure
-  region: West US 2
-  runtime: nodejs12.x
-  # os: windows  # windows is default, linux is available
+  region: West Europe
+  runtime: dotnet3.1 # dotnet3.1 or dotnet2.2 available
+  # os: windows # windows is default, linux is available
   # prefix: "sample"  # prefix of generated resource name
   # subscriptionId: A356AC8C-E310-44F4-BF85-C7F29044AF99
   # stage: dev
@@ -62,28 +62,17 @@ provider:
 plugins: # look for additional plugins in the community plugins repo: https://github.com/serverless/plugins
   - serverless-azure-functions
 
-# you can add packaging information here
-package:
-  # include:
-  #   - include-me.js
-  #   - include-me-dir/**
-  exclude:
-    # - exclude-me.js
-    # - exclude-me-dir/**
-    - local.settings.json
-    - .vscode/**
-
 functions:
   hello:
-    handler: src/handlers/hello.sayHello
+    handler: src/handlers/hello.main
     events:
       - http: true
         methods:
           - GET
-        authLevel: anonymous # can also be `function` or `admin`
+        authLevel: anonymous
 
   goodbye:
-    handler: src/handlers/goodbye.sayGoodbye
+    handler: src/handlers/goodbye.main
     events:
       - http: true
         methods:
@@ -91,7 +80,7 @@ functions:
         authLevel: anonymous
   # The following are a few examples of other events you can configure:
   # storageBlob:
-  #   handler: src/handlers/storageBlob.printMessage
+  #   handler: src/handlers/storageBlob
   #   events:
   #     - blob:
   #       x-azure-settings:
@@ -99,20 +88,20 @@ functions:
   #         path: blob-sample/{blobName}
   #         connection: AzureWebJobsStorage # App Setting/environment variable which contains Storage Account Connection String
   # storageQueue:
-  #   handler: src/handlers/storageQueue.printMessage
+  #   handler: src/handlers/storageQueue
   #   events:
   #     - queue: queue-sample
   #       x-azure-settings:
-  #         name: message # Specifies which naem is available on `context`
+  #         name: message # Specifies which name is available on `context`
   #         connection: AzureWebJobsStorage
   # timer:
-  #   handler: src/handlers/timer.printMessage
+  #   handler: src/handlers/timer
   #   events:
   #     - timer:
   #       x-azure-settings:
   #         schedule: '*/10 * * * * *'
   # eventhub:
-  #   handler: src/handlers/eventHub.printMessage
+  #   handler: src/handlers/eventHub
   #   events:
   #     - eventHub:
   #       x-azure-settings:
@@ -121,7 +110,7 @@ functions:
   #         consumerGroup: $Default # Specifies the consumerGroup to listen with
   #         connection: EVENT_HUBS_CONNECTION # App Setting/environment variable which contains Event Hubs Namespace Connection String
   # serviceBusQueue:
-  #   handler: src/handlers/serviceBusQueue.printMessage
+  #   handler: src/handlers/serviceBusQueue
   #   events:
   #     - serviceBus:
   #       x-azure-settings:
@@ -129,7 +118,7 @@ functions:
   #         queueName: sample-queue # Name of the service bus queue to consume
   #         connection: SERVICE_BUS_CONNECTION # App Setting/environment variable variable which contains Service Bus Namespace Connection String
   # serviceBusTopic:
-  #   handler: src/handlers/serviceBusTopic.printMessage
+  #   handler: src/handlers/serviceBusTopic
   #   events:
   #     - serviceBus:
   #       x-azure-settings:
